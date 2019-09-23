@@ -278,7 +278,7 @@ void OnDiskInvertedLists::do_mmap ()
                             filename.c_str(), rw_flags, strerror(errno));
 
     uint8_t * ptro = (uint8_t*)mmap (nullptr, totsize,
-                          prot, MAP_SHARED, fileno (f), 0);
+                          prot, MAP_SHARED|MAP_POPULATE, fileno (f), 0);
 
     FAISS_THROW_IF_NOT_FMT (ptro != MAP_FAILED,
                             "could not mmap %s: %s",
